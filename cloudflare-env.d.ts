@@ -8,7 +8,8 @@ declare namespace Cloudflare {
 	}
 }
 interface CloudflareEnv extends Cloudflare.Env {
-  SAMPLE: String;
+  GITHUB_URL: string;
+  SAMPLE: string;
 }
 
 // Begin runtime types
