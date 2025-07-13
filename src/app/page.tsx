@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export default async function Home() {
-  const { env, cf, ctx } = getCloudflareContext();
+  const { env, cf } = getCloudflareContext();
 
   console.log(cf);
 
