@@ -64,7 +64,7 @@ export default async function Home() {
           </div>
           <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mt-4 overflow-auto">
             <pre className="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-              {JSON.stringify({ isEUCountry: cf.isEUCountry }, null, 2)}
+              {JSON.stringify({ isEUCountry: cf?.isEUCountry }, null, 2)}
             </pre>
           </div>
           {error && (
