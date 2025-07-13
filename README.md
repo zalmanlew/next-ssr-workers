@@ -11,12 +11,17 @@ Then install packages and run the development server:
 
 ```bash
 bun install
-bun dev
+bun run dev
 ```
 
 To run via Workers runtime
 ```bash
-bun preview
+bun run preview
+```
+
+To deploy
+```bash
+bun run deploy
 ```
 
 ---
