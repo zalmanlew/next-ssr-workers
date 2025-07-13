@@ -1,5 +1,7 @@
 ## Getting Started
 
+Live preview: https://next-ssr.zalmanlew.workers.dev/
+
 Create a `.dev.vars` file
 ```
 NEXTJS_ENV=development

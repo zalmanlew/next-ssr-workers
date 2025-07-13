@@ -15,6 +15,7 @@
 		"enabled": true
 	},
 	"vars": {
-		"SAMPLE": "Zalman Lew"
+		"SAMPLE": "Zalman Lew",
+		"GITHUB_URL": "https://github.com/zalmanlew/next-ssr-workers"
 	}
 }
