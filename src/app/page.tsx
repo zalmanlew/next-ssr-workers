@@ -1,6 +1,29 @@
 import Image from "next/image";
+export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default async function Home() {
+  let data = null;
+  let error = null;
+  
+  try {
+    // Get the request headers
+    const { headers } = await import('next/headers');
+    const headersList = await headers();
+    const ip = headersList.get("CF-Connecting-IP") || '1.1.1.1';
+    
+    const res = await fetch(`https://ipinfo.io/${ip}/json`, {
+      cache: "no-store",
+    });
+    
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    
+    data = await res.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'Unknown error';
+    data = { error: 'Failed to fetch IP data' };
+  }
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -25,10 +48,26 @@ export default function Home() {
           </li>
         </ol>
 
+        <div className="w-full max-w-2xl">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+            Server-Side Data (IP Geolocation)
+          </h2>
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-auto">
+            <pre className="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+              {JSON.stringify(data, null, 2)}
+            </pre>
+          </div>
+          {error && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-2">
+              Error: {error}
+            </p>
+          )}
+        </div>
+
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://zalmanlew.com"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -39,7 +78,7 @@ export default function Home() {
               width={20}
               height={20}
             />
-            Deploy now
+            Zalman Lew
           </a>
           <a
             className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
